@@ -13,14 +13,19 @@ namespace mantis_tests
     public class ApplicationManager
     {
         protected IWebDriver driver;      
-        protected string baseURL;       
+        protected string baseURL;
+
+        public RegistrationHelper Registration { get; set; }
+        public FtpHelper Ftp { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost";           
+            baseURL = "http://localhost";
+            Registration = new RegistrationHelper(this);
+            Ftp = new FtpHelper(this);
         }        
         
         ~ApplicationManager()
